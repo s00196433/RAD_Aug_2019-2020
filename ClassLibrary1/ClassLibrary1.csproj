@@ -56,6 +56,10 @@
     <Compile Include="Migrations\202201100309453_InitialMigration.designer.cs">
       <DependentUpon>202201100309453_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202201100338407_seed table.cs" />
+    <Compile Include="Migrations\202201100338407_seed table.designer.cs">
+      <DependentUpon>202201100338407_seed table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="salesContext.cs" />
@@ -71,6 +75,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202201100309453_InitialMigration.resx">
       <DependentUpon>202201100309453_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202201100338407_seed table.resx">
+      <DependentUpon>202201100338407_seed table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

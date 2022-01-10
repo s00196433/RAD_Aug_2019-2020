@@ -3,7 +3,10 @@
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Globalization;
     using System.Linq;
+    using System.Threading;
+    using ClassLibrary1.salesModels;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ClassLibrary1.salesContext>
     {
@@ -19,186 +22,131 @@
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
 
-           /* context.Members.AddOrUpdate(member => member.MemberId, new Member[] {
-               new Member
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-GB");
+
+            context.Customers.AddOrUpdate(customer => customer.ID, new Customer[] {
+               new Customer
                {
-                   MemberId = 1,
-                   FirstName = "Elizabeth",
-                   SecondName= "Andersen"
+                   ID= 1,
+                   Name="Customer 1",
+                   Address="Address for Customer 1"
                },
-               new Member
+                new Customer
                {
-                   MemberId = 2,
-                   FirstName = "Catherine",
-                   SecondName= "Autier Miconi"
+                   ID= 2,
+                   Name="Customer 2",
+                   Address="Address for Customer 2"
                },
-               new Member
+                new Customer
                {
-                   MemberId = 3,
-                   FirstName = "Thomas",
-                   SecondName= "Axen"
+                   ID= 3,
+                   Name="Customer 3",
+                   Address="Address for Customer 3"
                },
-              new Member
-               {
-                   MemberId = 4,
-                   FirstName = "Jean Philippe",
-                   SecondName= "Bagel"
-               },
-               new Member
-               {
-                   MemberId = 5,
-                   FirstName = "Anna",
-                   SecondName= "Bedecs"
-               },
-            new Member
-               {
-                   MemberId = 6,
-                   FirstName = "John",
-                   SecondName= "Edwards"
-               },
-                  new Member
-               {
-                   MemberId = 7,
-                   FirstName = "Alexander",
-                   SecondName= "Eggerer"
-               },
-              new Member
-               {
-                   MemberId = 8,
-                   FirstName = "Michael",
-                   SecondName= "Entin"
-               },
-              new Member
-               {
-                   MemberId = 9,
-                   FirstName = "Daniel",
-                   SecondName= "Goldschmidt"
-               },
-               new Member
-               {
-                   MemberId = 10,
-                   FirstName = "Antonio",
-                   SecondName= "Gratacos Solsona"
-               },
-               new Member
-               {
-                   MemberId = 11,
-                   FirstName = "Carlos",
-                   SecondName= "Grilo"
-               },
-               new Member
-               {
-                   MemberId = 12,
-                   FirstName = " Jonas",
-                   SecondName= "Hasselberg"
-               }
+              
             });
 
-            context.Books.AddOrUpdate(book => book.BookId, new Book[] {
-               new Book
+            context.SalesOrders.AddOrUpdate(salesOrder => salesOrder.ID, new SalesOrder[] {
+               new SalesOrder
                {
-                   BookId=1,
-                   Title="The Hunger Games",
-                   ISBN="9780439023481",
-                   Author ="Suzanne Collins",
-                   LoanDuration=28
+                   ID = 1,
+                   CustomerID=1,
+                   orderDate= DateTime.Parse("12/01/2002")
                },
-              new Book
+              new SalesOrder
                {
-                   BookId=2,
-                   Title="Nineteen Eighty-Four",
-                   ISBN="1110141036141",
-                   Author ="George Orwell",
-                   LoanDuration=28
+                   ID = 2,
+                   CustomerID=2,
+                   orderDate= DateTime.Parse("31/10/2004")
                },
-               new Book
+               new SalesOrder
                {
-                   BookId=3,
-                   Title="Brave New World",
-                   ISBN="2220060929871",
-                   Author ="Aldous Huxley",
-                   LoanDuration=1
-               },
-
-                new Book
-               {
-                   BookId=4,
-                   Title="The Hound of the Baskervilles",
-                   ISBN="0001234564389",
-                   Author ="Athur Conan Doyle",
-                   LoanDuration=28
-               },
-               new Book
-               {
-                   BookId=5,
-                   Title="Literary works of Leonardo da Vinci",
-                   ISBN="0123456789196",
-                   Author ="Leonardo da Vinci",
-                   LoanDuration=1
-               },
-               new Book
-               {
-                   BookId=6,
-                   Title="The Arctic Incident",
-                   ISBN="9780786851478",
-                   Author ="Eoin Colfer",
-                   LoanDuration=28
-               },
-               new Book
-               {
-                   BookId=7,
-                   Title="Physical chemistry",
-                   ISBN="0716720736",
-                   Author="P. W. Atkins",
-                   LoanDuration=1
-               },
-               new Book
-               {
-                   BookId=8,
-                   Title="Universe",
-                   ISBN="0716746476",
-                   Author="Roger Freedman",
-                   LoanDuration=28
+                   ID = 3,
+                   CustomerID=2,
+                   orderDate= DateTime.Parse("10/10/2014")
                },
 
             });
-            context.Loans.AddOrUpdate(loan => loan.MemberId, new Loan[] {
-               new Loan
+            context.OrderLines.AddOrUpdate(orderLine => orderLine.ID, new OrderLine[] {
+               new OrderLine
                {
-                   LoanId=1,
-                   MemberId=1,
-                   BookId=1,
-                   LoanIssueDate = DateTime.Parse("05/12/2019")
+                   ID=1,
+                   SalesOrderID=1,
+                   ProductID=1,
+                   QtyOrder=10
                },
-               new Loan
+               new OrderLine
                {
-                   LoanId=2,
-                   MemberId=1,
-                   BookId=2,
-                   LoanIssueDate = DateTime.Parse("17/10/2019")
+                   ID=2,
+                   SalesOrderID=1,
+                   ProductID=2,
+                   QtyOrder=12
                },
-               new Loan
+              new OrderLine
                {
-                   LoanId=3,
-                   MemberId=5,
-                   BookId=3,
-                   LoanIssueDate = DateTime.Parse("12/12/2019")
+                   ID=3,
+                   SalesOrderID=2,
+                   ProductID=1,
+                   QtyOrder=3
                },
-               new Loan
+               new OrderLine
                {
-                   LoanId=4,
-                   MemberId=8,
-                   BookId=7,
-                   LoanIssueDate = DateTime.Parse("23/11/2019")
+                   ID=4,
+                   SalesOrderID=2,
+                   ProductID=2,
+                   QtyOrder=4
                },
-               new Loan
+              new OrderLine
                {
-                   LoanId=5,
-                   MemberId=6,
-                   BookId=4,
-                   LoanIssueDate = DateTime.Parse("21/10/2019")
+                   ID=5,
+                   SalesOrderID=2,
+                   ProductID=3,
+                   QtyOrder=5
                },
-            }); */
+              new OrderLine
+               {
+                   ID=6,
+                   SalesOrderID=3,
+                   ProductID=2,
+                   QtyOrder=2
+               },
+              new OrderLine
+               {
+                   ID=7,
+                   SalesOrderID=3,
+                   ProductID=3,
+                   QtyOrder=2
+               },
+            });
+            context.Products.AddOrUpdate(product => product.ID, new Product[] {
+               new Product
+               {
+                   ID = 1,
+                   Description="Item 1",
+                   FirstStock= DateTime.Parse("1/01/2002"),
+                   UnitCost=200,
+                   QuantityInStock=12,
+                   ReOrderQuantity=10
+               },
+              new Product
+               {
+                   ID = 2,
+                   Description="Item 2",
+                   FirstStock= DateTime.Parse("30/11/2003"),
+                   UnitCost=100,
+                   QuantityInStock=1,
+                   ReOrderQuantity=15
+               },
+              new Product
+               {
+                   ID = 3,
+                   Description="Item 3",
+                   FirstStock= DateTime.Parse("10/10/2000"),
+                   UnitCost=300,
+                   QuantityInStock=3,
+                   ReOrderQuantity=2
+               },
+            });
         }
     }
 }
